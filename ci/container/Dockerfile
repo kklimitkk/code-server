@@ -13,7 +13,10 @@ RUN yum update -y && yum install -y \
     libx11-devel
 
 RUN yum install -y epel-release && \
-    yum install -y ShellCheck jq
+    yum install -y ShellCheck jq golang
+
+RUN go get github.com/goreleaser/nfpm/cmd/nfpm
+ENV PATH=$PATH:/root/go/bin
 
 RUN mkdir /usr/share/node && cd /usr/share/node \
     && curl "https://nodejs.org/dist/v12.16.3/node-v12.16.3-linux-$(uname -m | sed 's/86_//; s/aarch/arm/').tar.xz" | tar xJ --strip-components=1 --
